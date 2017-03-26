@@ -1,0 +1,306 @@
+fileFormatVersion: 2
+guid: 013103c2b472af34fac9af80d645efeb
+timeCreated: 1488512172
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Axe
+    100002: Bip001
+    100004: Bip001 Footsteps
+    100006: Bip001 Head
+    100008: Bip001 HeadNub
+    100010: Bip001 L Calf
+    100012: Bip001 L Clavicle
+    100014: Bip001 L Finger0
+    100016: Bip001 L Finger0Nub
+    100018: Bip001 L Foot
+    100020: Bip001 L Forearm
+    100022: Bip001 L Hand
+    100024: Bip001 L Thigh
+    100026: Bip001 L Toe0
+    100028: Bip001 L Toe0Nub
+    100030: Bip001 L UpperArm
+    100032: Bip001 Neck
+    100034: Bip001 Pelvis
+    100036: Bip001 R Calf
+    100038: Bip001 R Clavicle
+    100040: Bip001 R Finger0
+    100042: Bip001 R Finger0Nub
+    100044: Bip001 R Foot
+    100046: Bip001 R Forearm
+    100048: Bip001 R Hand
+    100050: Bip001 R Thigh
+    100052: Bip001 R Toe0
+    100054: Bip001 R Toe0Nub
+    100056: Bip001 R UpperArm
+    100058: Bip001 Spine
+    100060: Bip001 Spine1
+    100062: Bone_Arrow
+    100064: Bone_Bow_A
+    100066: Bone_Bow_B
+    100068: Bone_Bow_C
+    100070: Bone_Bow_D
+    100072: Bone_jaw
+    100074: Bone_pauldron_L
+    100076: Bone_pauldron_R
+    100078: Bone_shield
+    100080: Bone_shield_grip
+    100082: Bone_waistB_1
+    100084: Bone_waistB_2
+    100086: Bone_waistF_1
+    100088: Bone_waistF_2
+    100090: Bone_weapon_grip
+    100092: Bow
+    100094: //RootNode
+    100096: fould_A
+    100098: Fould_add_L
+    100100: Fould_add_R
+    100102: fould_B
+    100104: gauntlet_A_L
+    100106: gauntlet_A_R
+    100108: gauntlet_B_L
+    100110: gauntlet_B_R
+    100112: greaves_A_L
+    100114: greaves_A_R
+    100116: helmet_A
+    100118: helmet_B
+    100120: helmet_C
+    100122: hood_A
+    100124: LongSword
+    100126: Mace
+    100128: Pauldron_A_L
+    100130: Pauldron_A_R
+    100132: Pauldron_B_L
+    100134: Pauldron_B_R
+    100136: quiver
+    100138: shield_A
+    100140: shield_B
+    100142: shield_C
+    100144: shortSword
+    100146: skeleton_mesh
+    100148: TwoHanded_Axe
+    400000: Axe
+    400002: Bip001
+    400004: Bip001 Footsteps
+    400006: Bip001 Head
+    400008: Bip001 HeadNub
+    400010: Bip001 L Calf
+    400012: Bip001 L Clavicle
+    400014: Bip001 L Finger0
+    400016: Bip001 L Finger0Nub
+    400018: Bip001 L Foot
+    400020: Bip001 L Forearm
+    400022: Bip001 L Hand
+    400024: Bip001 L Thigh
+    400026: Bip001 L Toe0
+    400028: Bip001 L Toe0Nub
+    400030: Bip001 L UpperArm
+    400032: Bip001 Neck
+    400034: Bip001 Pelvis
+    400036: Bip001 R Calf
+    400038: Bip001 R Clavicle
+    400040: Bip001 R Finger0
+    400042: Bip001 R Finger0Nub
+    400044: Bip001 R Foot
+    400046: Bip001 R Forearm
+    400048: Bip001 R Hand
+    400050: Bip001 R Thigh
+    400052: Bip001 R Toe0
+    400054: Bip001 R Toe0Nub
+    400056: Bip001 R UpperArm
+    400058: Bip001 Spine
+    400060: Bip001 Spine1
+    400062: Bone_Arrow
+    400064: Bone_Bow_A
+    400066: Bone_Bow_B
+    400068: Bone_Bow_C
+    400070: Bone_Bow_D
+    400072: Bone_jaw
+    400074: Bone_pauldron_L
+    400076: Bone_pauldron_R
+    400078: Bone_shield
+    400080: Bone_shield_grip
+    400082: Bone_waistB_1
+    400084: Bone_waistB_2
+    400086: Bone_waistF_1
+    400088: Bone_waistF_2
+    400090: Bone_weapon_grip
+    400092: Bow
+    400094: //RootNode
+    400096: fould_A
+    400098: Fould_add_L
+    400100: Fould_add_R
+    400102: fould_B
+    400104: gauntlet_A_L
+    400106: gauntlet_A_R
+    400108: gauntlet_B_L
+    400110: gauntlet_B_R
+    400112: greaves_A_L
+    400114: greaves_A_R
+    400116: helmet_A
+    400118: helmet_B
+    400120: helmet_C
+    400122: hood_A
+    400124: LongSword
+    400126: Mace
+    400128: Pauldron_A_L
+    400130: Pauldron_A_R
+    400132: Pauldron_B_L
+    400134: Pauldron_B_R
+    400136: quiver
+    400138: shield_A
+    400140: shield_B
+    400142: shield_C
+    400144: shortSword
+    400146: skeleton_mesh
+    400148: TwoHanded_Axe
+    2300000: Axe
+    2300002: Fould_add_L
+    2300004: Fould_add_R
+    2300006: gauntlet_A_L
+    2300008: gauntlet_A_R
+    2300010: gauntlet_B_L
+    2300012: gauntlet_B_R
+    2300014: greaves_A_L
+    2300016: greaves_A_R
+    2300018: LongSword
+    2300020: Mace
+    2300022: Pauldron_A_L
+    2300024: Pauldron_A_R
+    2300026: Pauldron_B_L
+    2300028: Pauldron_B_R
+    2300030: quiver
+    2300032: shield_A
+    2300034: shield_B
+    2300036: shield_C
+    2300038: shortSword
+    2300040: TwoHanded_Axe
+    3300000: Axe
+    3300002: Fould_add_L
+    3300004: Fould_add_R
+    3300006: gauntlet_A_L
+    3300008: gauntlet_A_R
+    3300010: gauntlet_B_L
+    3300012: gauntlet_B_R
+    3300014: greaves_A_L
+    3300016: greaves_A_R
+    3300018: LongSword
+    3300020: Mace
+    3300022: Pauldron_A_L
+    3300024: Pauldron_A_R
+    3300026: Pauldron_B_L
+    3300028: Pauldron_B_R
+    3300030: quiver
+    3300032: shield_A
+    3300034: shield_B
+    3300036: shield_C
+    3300038: shortSword
+    3300040: TwoHanded_Axe
+    4300000: skeleton_mesh
+    4300002: shield_B
+    4300004: shield_A
+    4300006: shield_C
+    4300008: Bow
+    4300010: gauntlet_B_L
+    4300012: gauntlet_A_L
+    4300014: Pauldron_B_L
+    4300016: Pauldron_A_L
+    4300018: Mace
+    4300020: Axe
+    4300022: shortSword
+    4300024: TwoHanded_Axe
+    4300026: LongSword
+    4300028: gauntlet_A_R
+    4300030: gauntlet_B_R
+    4300032: Pauldron_B_R
+    4300034: Pauldron_A_R
+    4300036: quiver
+    4300038: greaves_A_L
+    4300040: Fould_add_L
+    4300042: greaves_A_R
+    4300044: Fould_add_R
+    4300046: helmet_C
+    4300048: fould_B
+    4300050: helmet_A
+    4300052: helmet_B
+    4300054: hood_A
+    4300056: fould_A
+    7400000: mixamo.com
+    9500000: //RootNode
+    13700000: Bow
+    13700002: fould_A
+    13700004: fould_B
+    13700006: helmet_A
+    13700008: helmet_B
+    13700010: helmet_C
+    13700012: hood_A
+    13700014: skeleton_mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
