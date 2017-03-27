@@ -6,7 +6,6 @@ public class Cleave : Ability
 {
 	public KeyCode keyCode;
 	public float animationCooldown;
-	public float effectTimer;
 	public GameObject cleaveEffect;
 	public float furyCost;
 	public ResourceManager resourceManager;
@@ -21,7 +20,7 @@ public class Cleave : Ability
 
 	void Start () 
 	{
-		abilityManager = GetComponent<AbilityManager> ();
+		abilityManager = GameObject.Find("GameManager").GetComponent<AbilityManager> ();
 		anim = GetComponent<Animator> ();
 	}
 
@@ -39,7 +38,7 @@ public class Cleave : Ability
 			if (!attacking) 
 			{
 				attacking = true;
-				StartCoroutine (Attack ());
+				anim.SetBool ("Cleave", true);
 			}
 		}
 		if (Input.GetKeyUp (keyCode)) 
@@ -49,7 +48,7 @@ public class Cleave : Ability
 		}
 	}
 
-	IEnumerator Attack()
+	IEnumerator CleaveAttack()
 	{
 		if (!spendingFury) {
 			spendingFury = true;
@@ -57,7 +56,6 @@ public class Cleave : Ability
 		}
 		cleaveEffect.SetActive (true);
 
-		anim.SetBool ("Cleave", true);
 		yield return new WaitForSeconds (.1f);
 
 			source.clip = cleaveSound;

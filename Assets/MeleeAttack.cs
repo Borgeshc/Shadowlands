@@ -7,6 +7,7 @@ public class MeleeAttack : MonoBehaviour
 	public int minDamage;
 	public int maxDamage;
 	public int criticalNumber;
+
 	int damage;
 
 	void OnTriggerEnter(Collider other)

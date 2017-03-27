@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DamageOnStay : MonoBehaviour 
 {
+	public int minDamage;
+	public int maxDamage;
+	public int criticalNumber;
 	public int damage;
 	bool dealingDamage;
 
@@ -11,7 +14,7 @@ public class DamageOnStay : MonoBehaviour
 	{
         if(other.transform.GetComponent<Health>() != null && other.transform.GetComponent<Health>().health > 0 && gameObject.activeInHierarchy)
         {
-            if (other.tag == "Enemy" || other.tag == "Player")
+			if (other.tag == "Enemy" || other.tag == "Player" || other.tag == "Dragon")
             {
                 if (!dealingDamage)
                 {
@@ -24,8 +27,18 @@ public class DamageOnStay : MonoBehaviour
 
 	IEnumerator DealDamage(GameObject enemy)
 	{
-		enemy.GetComponent<Health> ().TookDamage (damage);
+		enemy.GetComponent<Health> ().TookDamage (CritChance(),damage);
 		yield return new WaitForSeconds (1);
 		dealingDamage = false;
+	}
+
+	bool CritChance()
+	{
+		int damageAmount = Random.Range (minDamage, maxDamage);
+		damage = damageAmount; 
+		if (damageAmount < criticalNumber)
+			return false;
+		else
+			return true;
 	}
 }
