@@ -95,7 +95,7 @@ ModelImporter:
     400086: LeftHandOne
     400088: Name
     400090: RightHandOne
-    7400000: a400_2
+    7400000: Attack1
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -120,7 +120,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: a400_2
+      name: Attack1
       takeName: Take 001
       firstFrame: 0
       lastFrame: 15
