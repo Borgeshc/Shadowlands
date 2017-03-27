@@ -17,6 +17,7 @@ public class Multishot : MonoBehaviour
 	ObjectPooling multishotPool;
 	Animator anim;
 	Vector3 tarPos;
+	Vector3 destinationPosition;
 
 	void Start () 
 	{
@@ -36,6 +37,20 @@ public class Multishot : MonoBehaviour
 
 	IEnumerator Fire()
 	{
+		if (Input.GetMouseButtonDown (1) && GUIUtility.hotControl == 0) {
+
+			Plane playerPlane = new Plane (Vector3.up, transform.position);
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			float hitdist = 0.0f;
+
+			if (playerPlane.Raycast (ray, out hitdist)) {
+				Vector3 targetPoint = ray.GetPoint (hitdist);
+				destinationPosition = ray.GetPoint (hitdist);
+				Quaternion targetRotation = Quaternion.LookRotation (targetPoint - transform.position);
+				//	myTransform.rotation = Quaternion.Slerp (myTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+				transform.rotation = targetRotation;
+			}
+		}
 		abilityManager.abilityInProgress = true;
 		ClickToMove.canMove = false;
 		anim.SetBool ("Multishot", true);

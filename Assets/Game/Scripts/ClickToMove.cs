@@ -123,7 +123,7 @@ public class ClickToMove : MonoBehaviour
 					footSteps = true;
 					StartCoroutine (FootStepSound ());
 				}
-				if(!Input.GetKey(KeyCode.LeftShift) || canMove)
+				if(!Input.GetKey(KeyCode.LeftShift) && canMove)
 				anim.SetBool ("IsWalking", true);
 				
 				cc.SimpleMove (transform.forward * moveSpeed * Time.deltaTime);
