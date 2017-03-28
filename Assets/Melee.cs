@@ -39,7 +39,7 @@ public class Melee : MonoBehaviour
 		if (melee == 4)
 			melee = 1;
 		anim.SetInteger ("Melee", melee);
-		yield return new WaitForSeconds (.3f);
+		yield return new WaitForSeconds (.1f);
 
 		resourceManager.GainResource (resourceGain);
 
