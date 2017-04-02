@@ -42,6 +42,14 @@ public class ClickToMove : MonoBehaviour
 
 	void FixedUpdate () 
 	{
+        if(TargetObject.target != null && Vector3.Distance(transform.position, TargetObject.target.transform.position) <= 1.5f)
+        {
+            canMove = false;
+        }
+        else if(!abilityManager.abilityInProgress)
+        {
+            canMove = true;
+        }
 		if (!canMove)
 			anim.SetBool ("IsWalking", false);
 		if (canMove && !abilityManager.abilityInProgress) 
@@ -65,7 +73,6 @@ public class ClickToMove : MonoBehaviour
 			// Moves the Player if the Left Mouse Button was clicked
 			if (Input.GetMouseButtonDown (0) && GUIUtility.hotControl == 0) 
 			{
-
 				Plane playerPlane = new Plane (Vector3.up, myTransform.position);
 				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 				float hitdist = 0.0f;
@@ -96,44 +103,43 @@ public class ClickToMove : MonoBehaviour
 					}
 				}
 			}
+            //// Moves the player if the mouse button is hold down
+            else if (Input.GetMouseButton(0) && GUIUtility.hotControl == 0)
+            {
+                Plane playerPlane = new Plane(Vector3.up, myTransform.position);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                float hitdist = 0.0f;
 
-		// Moves the player if the mouse button is hold down
-		else if (Input.GetMouseButton (0) && GUIUtility.hotControl == 0) 
-			{
+                if (playerPlane.Raycast(ray, out hitdist))
+                {
+                    Vector3 targetPoint = ray.GetPoint(hitdist);
+                    destinationPosition = ray.GetPoint(hitdist);
+                    Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+                    //myTransform.rotation = Quaternion.Slerp (myTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    myTransform.rotation = targetRotation;
+                }
+                //	myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
+            }
 
-				Plane playerPlane = new Plane (Vector3.up, myTransform.position);
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-				float hitdist = 0.0f;
+            // To prevent code from running if not needed
+            if (destinationDistance > 1.5f)
+            {
+                if (!source.isPlaying && !footSteps)
+                {
+                    footSteps = true;
+                    StartCoroutine(FootStepSound());
+                }
+                if (!Input.GetKey(KeyCode.LeftShift) && canMove)
+                    anim.SetBool("IsWalking", true);
 
-				if (playerPlane.Raycast (ray, out hitdist)) 
-				{
-					Vector3 targetPoint = ray.GetPoint (hitdist);
-					destinationPosition = ray.GetPoint (hitdist);
-					Quaternion targetRotation = Quaternion.LookRotation (targetPoint - transform.position);
-					//myTransform.rotation = Quaternion.Slerp (myTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-					myTransform.rotation = targetRotation;
-				}
-				//	myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
-			}
-
-			// To prevent code from running if not needed
-			if (destinationDistance > .5f) {
-				if (!source.isPlaying && !footSteps) 
-				{
-					footSteps = true;
-					StartCoroutine (FootStepSound ());
-				}
-				if(!Input.GetKey(KeyCode.LeftShift) && canMove)
-				anim.SetBool ("IsWalking", true);
-				
-				cc.SimpleMove (transform.forward * moveSpeed * Time.deltaTime);
-				//	myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
-			} 
-			else 
-			{
-				anim.SetBool ("IsWalking", false);
-			}
-		}
+                cc.SimpleMove(transform.forward * moveSpeed * Time.deltaTime);
+                //	myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                anim.SetBool("IsWalking", false);
+            }
+        }
 	}
 
 	IEnumerator FootStepSound()

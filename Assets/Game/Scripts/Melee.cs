@@ -7,6 +7,8 @@ public class Melee : MonoBehaviour
 	public KeyCode keyCode;
 
 	public static bool attacking;
+    public GameObject sword1;
+    public GameObject sword2;
 
 	public float resourceGain;
 	public ResourceManager resourceManager;
@@ -23,7 +25,7 @@ public class Melee : MonoBehaviour
 
 	void Update () 
 	{
-		if (Input.GetKey (keyCode) && !attacking && TargetObject.target != null && !abilityManager.abilityInProgress) 
+		if (Input.GetKeyDown (keyCode) && !attacking && TargetObject.target != null && !abilityManager.abilityInProgress && Vector3.Distance(transform.position, TargetObject.target.transform.position) <= 1.5f) 
 		{
 			if(!abilityManager.abilityInProgress)
 				abilityManager.abilityInProgress = true;
@@ -31,7 +33,16 @@ public class Melee : MonoBehaviour
 			attacking = true;
 			StartCoroutine (Attack ());
 		}
-	}
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(keyCode) && !attacking && TargetObject.target != null && !abilityManager.abilityInProgress && Vector3.Distance(transform.position, TargetObject.target.transform.position) <= 1.5f)
+        {
+            if (!abilityManager.abilityInProgress)
+                abilityManager.abilityInProgress = true;
+
+            attacking = true;
+            StartCoroutine(Attack());
+        }
+    }
 
 	IEnumerator Attack()
 	{
@@ -39,7 +50,7 @@ public class Melee : MonoBehaviour
 		if (melee == 4)
 			melee = 1;
 		anim.SetInteger ("Melee", melee);
-		yield return new WaitForSeconds (.1f);
+		yield return new WaitForSeconds (.7f);
 
 		resourceManager.GainResource (resourceGain);
 
@@ -50,4 +61,16 @@ public class Melee : MonoBehaviour
 		
 		attacking = false;
 	}
+
+    void DealDamage()
+    {
+        sword1.SetActive(true);
+        sword2.SetActive(true);
+    }
+
+    void StopDealingDamage()
+    {
+        sword1.SetActive(false);
+        sword2.SetActive(false);
+    }
 }
