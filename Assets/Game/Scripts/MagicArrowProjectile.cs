@@ -8,6 +8,7 @@ public class MagicArrowProjectile : MonoBehaviour
 	public int minDamage;
 	public int maxDamage;
 	public int criticalNumber;
+    public GameObject target;
 	int damage;
 
 	void Start()
@@ -19,7 +20,7 @@ public class MagicArrowProjectile : MonoBehaviour
 	{
 		if(TargetObject.target != null)
 		{
-			transform.LookAt (new Vector3(TargetObject.target.transform.position.x, TargetObject.target.transform.position.y + (TargetObject.target.transform.localScale.y * .5f), TargetObject.target.transform.position.z));
+			transform.LookAt (new Vector3(target.transform.position.x, target.transform.position.y + (target.transform.localScale.y * .5f), target.transform.position.z));
 			transform.Translate (Vector3.forward * projectileSpeed * Time.deltaTime);
 		}
 		else
@@ -30,6 +31,10 @@ public class MagicArrowProjectile : MonoBehaviour
 	{
 		if (other.tag == "Enemy") 
 		{
+            if(!other.GetComponent<ProximityAI>().IsSlowed())
+            {
+                StartCoroutine(other.GetComponent<ProximityAI>().Slowed());
+            }
 			other.GetComponent<Health> ().TookDamage (CritChance(),damage);
 			gameObject.SetActive (false);
 		}

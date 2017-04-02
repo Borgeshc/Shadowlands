@@ -22,6 +22,10 @@ public class ProximityAI : MonoBehaviour
 	StatusEffect checkStatus;
 	Vector3 lookPosition;
 	Quaternion rotation;
+    float currentSpeed;
+    bool slowed;
+
+    bool inRange;
 
     void Start()
     {
@@ -29,6 +33,8 @@ public class ProximityAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         myHealth = GetComponent<Health>();
 		checkStatus = GetComponent<StatusEffect> ();
+        currentSpeed = speed;
+        nav.speed = currentSpeed;
     }
 
     private void OnEnable()
@@ -37,40 +43,68 @@ public class ProximityAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         myHealth = GetComponent<Health>();
         checkStatus = GetComponent<StatusEffect>();
+        currentSpeed = speed;
+        nav.speed = currentSpeed;
+    }
+
+    public bool IsSlowed()
+    {
+        if (!slowed)
+            return false;
+        else
+            return true;
+
+    }
+
+    public IEnumerator Slowed()
+    {
+        if(!slowed)
+        {
+            slowed = true;
+            nav.speed = (currentSpeed * .25f);
+            yield return new WaitForSeconds(5);
+            nav.speed = currentSpeed;
+            slowed = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (inRange)
+        {
+            if (!myHealth.isDead && myHealth.health > 0 && player != null)
+            {
+                if (player.activeInHierarchy && myHealth.health > 0)
+                {
+                    lookPosition = player.transform.position - transform.position;
+                    lookPosition.y = 0;
+                    rotation = Quaternion.LookRotation(lookPosition);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
+
+                    if (Vector3.Distance(transform.position, player.transform.position) > stoppingDistance)
+                    {
+                        anim.SetBool("IsWalking", true);
+                        nav.SetDestination(player.transform.position);
+                    }
+                    else
+                    {
+                        anim.SetBool("IsWalking", false);
+                        nav.SetDestination(transform.position);
+
+                        if (!attacking)
+                        {
+                            attacking = true;
+                            StartCoroutine(Attack());
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void InRange(Collider other)
     {
-		if (!myHealth.isDead && myHealth.health > 0 && player != null)
-		{
-			if (player.activeInHierarchy && myHealth.health > 0) 
-			{
-				lookPosition = player.transform.position - transform.position;
-				lookPosition.y = 0;
-				rotation = Quaternion.LookRotation (lookPosition);
-				transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.deltaTime * turnSpeed);
-
-				if (Vector3.Distance (transform.position, player.transform.position) > stoppingDistance) 
-				{
-					anim.SetBool ("Attack", false);
-					anim.SetBool ("IsWalking", true);
-					nav.SetDestination (player.transform.position);
-				} 
-				else 
-				{
-					if (!attacking) 
-					{
-						attacking = true;
-						StartCoroutine (Attack ());
-					}
-				}
-			}
-		} 
-		else 
-		{
-			anim.SetBool ("IsWalking", true);
-			nav.Stop ();
-		}
+        inRange = true;
     }
 
     IEnumerator Attack()
@@ -86,6 +120,7 @@ public class ProximityAI : MonoBehaviour
         player.GetComponent<Health>().TookDamage(damage);
 		
         yield return new WaitForSeconds(attackFrequency);
+        anim.SetBool("Attack", false);
         attacking = false;
     }
 }

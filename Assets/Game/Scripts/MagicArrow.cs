@@ -16,6 +16,7 @@ public class MagicArrow : MonoBehaviour
 	AbilityManager abilityManager;
 	ObjectPooling arrowPool;
 	Animator anim;
+    GameObject lastTarget;
 
 	void Start () 
 	{
@@ -29,6 +30,7 @@ public class MagicArrow : MonoBehaviour
 	{
 		if (Input.GetKey (keyCode) && !abilityManager.abilityInProgress && TargetObject.target != null) 
 		{
+            lastTarget = TargetObject.target;
 			Fire ();
 		} 
 		else if (Input.GetKeyUp (keyCode)) 
@@ -70,6 +72,7 @@ public class MagicArrow : MonoBehaviour
 		{
 			return;
 		}
+        obj.GetComponent<MagicArrowProjectile>().target = lastTarget;
 		obj.transform.position = arrowSpawn.transform.position;
 		obj.SetActive(true);
 	}
