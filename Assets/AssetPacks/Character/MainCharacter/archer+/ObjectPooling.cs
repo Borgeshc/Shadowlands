@@ -50,7 +50,7 @@ public class ObjectPooling : MonoBehaviour
 		{
 			GameObject obj = (GameObject)Instantiate(pooledObject[i]);
 			obj.transform.parent = transform;
-
+            obj.transform.position = transform.position;
 			obj.SetActive(false);
 			pooledObjects.Add(obj);
 		}

@@ -9,8 +9,10 @@ public class SpawnNode : MonoBehaviour
     public GameObject[] levelThreeEnemies;
     public int enemyDifficultyLevel;
     public int allowedSpawnAmount;
+    public int spawnOffset;
 
-    List<GameObject> activatedEnemies;
+
+    public List<GameObject> activatedEnemies;
 
     public void NodeActivated()
     {
@@ -66,7 +68,7 @@ public class SpawnNode : MonoBehaviour
 
     Vector3 SpawnPosition()
     {
-        Vector3 newSpawnPosition = new Vector3(transform.position.x + Random.Range(0, 10), transform.position.y, transform.position.z + Random.Range(0, 10));
+        Vector3 newSpawnPosition = new Vector3(transform.position.x + Random.Range(0, spawnOffset), transform.position.y, transform.position.z + Random.Range(0, spawnOffset));
         return newSpawnPosition;
     }
 }

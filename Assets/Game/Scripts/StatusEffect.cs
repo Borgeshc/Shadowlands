@@ -20,7 +20,12 @@ public class StatusEffect : MonoBehaviour
 		health = GetComponent<Health> ();
 	}
 
-	public void OnFire(int damage, int statusLength)
+    private void OnEnable()
+    {
+        health = GetComponent<Health>();
+    }
+
+    public void OnFire(int damage, int statusLength)
 	{
 		statusEffectActive = true;
 

@@ -31,6 +31,14 @@ public class ProximityAI : MonoBehaviour
 		checkStatus = GetComponent<StatusEffect> ();
     }
 
+    private void OnEnable()
+    {
+        nav = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        myHealth = GetComponent<Health>();
+        checkStatus = GetComponent<StatusEffect>();
+    }
+
     public void InRange(Collider other)
     {
 		if (!myHealth.isDead && myHealth.health > 0 && player != null)

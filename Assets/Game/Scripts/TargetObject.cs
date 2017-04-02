@@ -58,9 +58,12 @@ public class TargetObject : MonoBehaviour
 			target = null;
 
 			if (highlightedTargets != null)
-				foreach (GameObject targets in highlightedTargets) {
+				foreach (GameObject targets in highlightedTargets)
+                {
 					if(targets != null && targets.GetComponent<SetTarget>() != null)
-					targets.GetComponent<SetTarget> ().NotTargeted ();
+                    {
+                        targets.GetComponent<SetTarget>().NotTargeted();
+                    }
 				}
 		}
     }

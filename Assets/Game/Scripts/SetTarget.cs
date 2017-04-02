@@ -17,7 +17,14 @@ public class SetTarget : MonoBehaviour
 		outlineShader = Shader.Find ("Custom/OutlineDiffuse");
 	}
 
-	public void Targeted()
+    private void OnEnable()
+    {
+        rend = myMesh.GetComponent<Renderer>();
+        originalShader = rend.material.shader;
+        outlineShader = Shader.Find("Custom/OutlineDiffuse");
+    }
+
+    public void Targeted()
 	{
 		rend.material.shader = outlineShader;
 	}

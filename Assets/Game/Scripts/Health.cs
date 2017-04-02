@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
 	bool hitEffect;
 	[HideInInspector]
 	public bool isDead;
-	CapsuleCollider collision;
+	Collider collision;
 	public AudioClip[] hitEffectSounds;
 	public AudioSource source;
 	public float experienceWorth;
@@ -31,10 +31,19 @@ public class Health : MonoBehaviour
 	{
 		health = maxHealth;
 		xpManager = GameObject.Find ("GameManager").GetComponent<ExperienceManager> ();
-		collision = GetComponent<CapsuleCollider> ();
+		collision = GetComponent<Collider> ();
 	}
 
-	public void TookDamage(int damage)
+    private void OnEnable()
+    {
+        health = maxHealth;
+        xpManager = GameObject.Find("GameManager").GetComponent<ExperienceManager>();
+        collision = GetComponent<Collider>();
+        collision.enabled = true;
+        isDead = false;
+    }
+
+    public void TookDamage(int damage)
 	{
 		if (Block.isBlocking || isImmune) {
 			return;
@@ -115,8 +124,8 @@ public class Health : MonoBehaviour
 		}
 
 		yield return new WaitForSeconds (deathTime);
-        if(transform.tag != "Dragon")
-		Destroy (gameObject);
+        if (transform.tag != "Dragon")
+            gameObject.SetActive(false);
 	}
 
 	public void GainHealth(float healthGain)
@@ -193,4 +202,12 @@ public class Health : MonoBehaviour
 		Destroy (cbt.gameObject, 2);
 		return cbt;
 	}
+
+    private void OnDisable()
+    {
+        if(transform.tag.Equals("Enemy"))
+        {
+            transform.position = new Vector3(100,100,100);
+        }
+    }
 }
