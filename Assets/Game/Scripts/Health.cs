@@ -191,16 +191,21 @@ public class Health : MonoBehaviour
 
 	GameObject CombatText(string damageText)
 	{
-		GameObject cbt = Instantiate (combatText) as GameObject;
-		RectTransform cbtTransform = cbt.GetComponent<RectTransform> ();
-		cbt.transform.SetParent (transform.FindChild ("Canvas"));
-		cbtTransform.transform.localPosition = combatText.transform.localPosition;
-		cbtTransform.transform.localScale = combatText.transform.localScale;
-		cbtTransform.transform.localRotation = combatText.transform.localRotation;
+        if (combatText != null)
+        {
+            GameObject cbt = Instantiate(combatText) as GameObject;
+            RectTransform cbtTransform = cbt.GetComponent<RectTransform>();
+            cbt.transform.SetParent(transform.FindChild("Canvas"));
+            cbtTransform.transform.localPosition = combatText.transform.localPosition;
+            cbtTransform.transform.localScale = combatText.transform.localScale;
+            cbtTransform.transform.localRotation = combatText.transform.localRotation;
 
-		cbt.GetComponent<Text> ().text = damageText;
-		Destroy (cbt.gameObject, 2);
-		return cbt;
+            cbt.GetComponent<Text>().text = damageText;
+            Destroy(cbt.gameObject, 2);
+            return cbt;
+        }
+        else
+            return null;
 	}
 
     private void OnDisable()
