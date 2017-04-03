@@ -19,7 +19,8 @@ public class ExperienceManager : MonoBehaviour
 		currentLevel = PlayerPrefs.GetInt ("CurrentLevel");
 		UIlevel.text = "" + currentLevel;
 		experienceBar.fillAmount = PlayerPrefs.GetFloat ("CurrentExperience");
-
+        levelUpEffect = GameObject.Find("LeveledUp!");
+        levelUpEffect.SetActive(false);
 		health = GameObject.Find ("Player").GetComponent<Health>();
 	}
 

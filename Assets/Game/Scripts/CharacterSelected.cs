@@ -15,4 +15,9 @@ public class CharacterSelected : MonoBehaviour
     {
         anim.SetBool("Selected", false);
     }
+
+    public void CharacterSelection(int myClass)
+    {
+        PlayerPrefs.SetInt("ClassChosen", myClass);
+    }
 }

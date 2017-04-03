@@ -11,6 +11,7 @@ public class LoadLevel : MonoBehaviour
 	{
 		if (other.tag == "Player") 
 		{
+            PlayerPrefs.SetString("GameStatus", "LevelJustLoaded");
 			SceneManager.LoadScene (level);
 		}
 	}

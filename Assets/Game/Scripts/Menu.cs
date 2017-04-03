@@ -7,12 +7,13 @@ public class Menu : MonoBehaviour
 {
 	public void NewGame()
 	{
-		SceneManager.LoadScene ("World");
-	}
+        SceneManager.LoadScene ("World");
+    }
 
 	public void Continue()
 	{
-		SceneManager.LoadScene ("World");
+        PlayerPrefs.SetString("GameStatus", "Continue");
+        SceneManager.LoadScene ("World");
 	}
 
 	public void Settings()
@@ -24,4 +25,10 @@ public class Menu : MonoBehaviour
 	{
 		Application.Quit();
 	}
+
+    public void ResetProgress()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetString("GameStatus", "NewGame");
+    }
 }

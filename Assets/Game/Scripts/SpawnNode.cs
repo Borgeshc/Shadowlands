@@ -1,24 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class SpawnNode : MonoBehaviour
 {
     public GameObject[] levelOneEnemies;
     public GameObject[] levelTwoEnemies;
     public GameObject[] levelThreeEnemies;
+
     public int enemyDifficultyLevel;
     public int allowedSpawnAmount;
     public int spawnOffset;
-
-
+    
     public List<GameObject> activatedEnemies;
+
+    SpawnNodeManager nodeManager;
+
+    private void Start()
+    {
+        nodeManager = GameObject.Find("SceneManager").GetComponent<SpawnNodeManager>();
+    }
 
     public void NodeActivated()
     {
-        PopulateActivatedEnemies();
-        Spawn();
-        Destroy(gameObject);
+        if (!PlayerPrefsX.GetBool(transform.name))
+        {
+            nodeManager.SpawnNodeUsed(transform.name);
+            PopulateActivatedEnemies();
+            Spawn();
+            Destroy(gameObject);
+        }
+        else
+            Destroy(gameObject);
     }
 
     void PopulateActivatedEnemies()
