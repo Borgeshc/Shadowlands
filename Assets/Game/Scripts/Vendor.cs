@@ -15,6 +15,7 @@ public class Vendor : MonoBehaviour
 
     void Start()
     {
+        inventory = GameObject.Find("Inventory");
         myInventory = inventory.GetComponent<Inventory>();
     }
 

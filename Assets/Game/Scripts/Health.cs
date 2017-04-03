@@ -36,11 +36,14 @@ public class Health : MonoBehaviour
 
     private void OnEnable()
     {
-        health = maxHealth;
-        xpManager = GameObject.Find("GameManager").GetComponent<ExperienceManager>();
-        collision = GetComponent<Collider>();
-        collision.enabled = true;
-        isDead = false;
+        if(transform.tag != "Player")
+        {
+            health = maxHealth;
+            xpManager = GameObject.Find("GameManager").GetComponent<ExperienceManager>();
+            collision = GetComponent<Collider>();
+            collision.enabled = true;
+            isDead = false;
+        }
     }
 
     public void TookDamage(int damage)
