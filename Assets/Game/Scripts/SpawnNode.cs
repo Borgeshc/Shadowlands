@@ -18,7 +18,7 @@ public class SpawnNode : MonoBehaviour
 
     private void Start()
     {
-        nodeManager = GameObject.Find("SceneManager").GetComponent<SpawnNodeManager>();
+        nodeManager = GameObject.Find("SpawnManager").GetComponent<SpawnNodeManager>();
     }
 
     public void NodeActivated()

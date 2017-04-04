@@ -13,7 +13,7 @@ public class Menu : MonoBehaviour
 	public void Continue()
 	{
         PlayerPrefs.SetString("GameStatus", "Continue");
-        SceneManager.LoadScene ("World");
+        SceneManager.LoadScene (PlayerPrefs.GetString("LastScene"));
 	}
 
 	public void Settings()

@@ -16,8 +16,9 @@ public class SpawnManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+        print("Called");
         PlayerPrefs.SetString("LastScene", Application.loadedLevelName);
-        freshGamePosition = transform.FindChild("FreshGamePosition").gameObject;
+        freshGamePosition = GameObject.Find("FreshGamePosition").gameObject;
 
         classChosen = PlayerPrefs.GetInt("ClassChosen");
         playerPrefab = Instantiate(classes[classChosen]) as GameObject;
@@ -30,6 +31,8 @@ public class SpawnManager : MonoBehaviour
             player.transform.position = PlayerPrefsX.GetVector3("LastPosition");
             player.transform.rotation = PlayerPrefsX.GetQuaternion("LastRotation");
         }
+
+        print(player.name);
     }
 
     void Update ()

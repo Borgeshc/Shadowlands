@@ -4,34 +4,38 @@ using UnityEngine;
 
 public class SpawnNodeManager : MonoBehaviour
 {
-    public static List<GameObject> spawnNodes;
-    
-	void Start ()
-    {
-        Application.DontDestroyOnLoad(gameObject);
-        spawnNodes = new List<GameObject>();
-		foreach(GameObject go in GameObject.FindGameObjectsWithTag("SpawnNode"))
-        {
-            spawnNodes.Add(go);
-        }
-
-        for(int i = 0; i < spawnNodes.Count; i++)
-        {
-            spawnNodes[i].name = "SpawnNode" + i;
-        }
-	}
+    public List<GameObject> spawnNodes;
+    bool initiated;
 
     private void OnLevelWasLoaded(int level)
     {
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("SpawnManager"))
+        {
+            Destroy(go);
+        }
+
+        if (!initiated)
+        {
+            initiated = true;
+            spawnNodes = new List<GameObject>();
+        }
+
         Application.DontDestroyOnLoad(gameObject);
+        PopulateList();
+ 
+    }
+
+    void PopulateList()
+    {
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("SpawnNode"))
         {
-            if(!spawnNodes.Contains(go))
-            spawnNodes.Add(go);
+            if (!spawnNodes.Contains(go))
+                spawnNodes.Add(go);
         }
 
         for (int i = 0; i < spawnNodes.Count; i++)
         {
+            if(spawnNodes[i] != null)
             spawnNodes[i].name = "SpawnNode" + i;
         }
     }
