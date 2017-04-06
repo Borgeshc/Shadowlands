@@ -120,6 +120,23 @@ public class ClickToMove : MonoBehaviour
                 }
                 //	myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
             }
+            //// Moves the player if the mouse button is hold down
+            else if (Bladestorm.bladestorming && Input.GetMouseButton(1) && GUIUtility.hotControl == 0)
+            {
+                Plane playerPlane = new Plane(Vector3.up, myTransform.position);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                float hitdist = 0.0f;
+
+                if (playerPlane.Raycast(ray, out hitdist))
+                {
+                    Vector3 targetPoint = ray.GetPoint(hitdist);
+                    destinationPosition = ray.GetPoint(hitdist);
+                    Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+                    //myTransform.rotation = Quaternion.Slerp (myTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    myTransform.rotation = targetRotation;
+                }
+                //	myTransform.position = Vector3.MoveTowards(myTransform.position, destinationPosition, moveSpeed * Time.deltaTime);
+            }
 
             // To prevent code from running if not needed
             if (destinationDistance > 1.5f)

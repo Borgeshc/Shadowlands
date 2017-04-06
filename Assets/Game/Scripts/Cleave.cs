@@ -7,7 +7,7 @@ public class Cleave : Ability
 	public KeyCode keyCode;
 	public float animationCooldown;
 	public GameObject cleaveEffect;
-	public float furyCost;
+	public float furyGain;
 	public ResourceManager resourceManager;
 	public AudioClip cleaveSound;
 	public AudioSource source;
@@ -16,7 +16,7 @@ public class Cleave : Ability
 	Animator anim;
 	bool isCleaving;
 	bool attacking;
-	bool spendingFury;
+	bool gainingFury;
 
 	void Start () 
 	{
@@ -26,7 +26,7 @@ public class Cleave : Ability
 
 	void Update () 
 	{
-		if (Input.GetKeyDown (keyCode) && !abilityManager.abilityInProgress && resourceManager.resource > furyCost) 
+		if (Input.GetKeyDown (keyCode) && !abilityManager.abilityInProgress && TargetObject.target != null &&Vector3.Distance(transform.position, TargetObject.target.transform.position) < 3) 
 		{
 			abilityManager.abilityInProgress = true;
 			isCleaving = true;
@@ -50,10 +50,10 @@ public class Cleave : Ability
 
 	IEnumerator CleaveAttack()
 	{
-		if (!spendingFury) {
-			spendingFury = true;
-			resourceManager.CostResource (furyCost);
-		}
+		if (!gainingFury) {
+            gainingFury = true;
+            resourceManager.GainResource(furyGain);
+        }
 		cleaveEffect.SetActive (true);
 
 		yield return new WaitForSeconds (.1f);
@@ -65,6 +65,6 @@ public class Cleave : Ability
 		anim.SetBool ("Cleave", false);
 		cleaveEffect.SetActive (false);
 		attacking = false;
-		spendingFury = false;
+        gainingFury = false;
 	}
 }

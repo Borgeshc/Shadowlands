@@ -12,6 +12,8 @@ public class Bladestorm : MonoBehaviour
 	public float furyCost;
 	public ResourceManager resourceManager;
 
+    public static bool bladestorming;
+
 	bool onCooldown;
 	AbilityManager abilityManager;
 	Animator anim;
@@ -23,35 +25,31 @@ public class Bladestorm : MonoBehaviour
 
 	void Update () 
 	{
-		if (Input.GetKeyDown (keyCode) && !abilityManager.abilityInProgress && resourceManager.resource > furyCost && !onCooldown) 
-		{
-			onCooldown = true;
+		if (Input.GetKey (keyCode) && !abilityManager.abilityInProgress && resourceManager.resource > furyCost)
+        {
+            bladestorming = true;
+            if (!bladestormEffect.activeInHierarchy)
+                bladestormEffect.SetActive(true);
+
+            if (!anim.GetBool("Bladestorm"))
 			anim.SetBool ("Bladestorm", true);
 		}
+        else
+        {
+            bladestorming = false;
+
+            if (bladestormEffect.activeInHierarchy)
+                bladestormEffect.SetActive(false);
+
+            if (anim.GetBool("Bladestorm"))
+                anim.SetBool("Bladestorm", false);
+        }
 	}
 
-	void BladestormAttackBegin()
-	{
-		resourceManager.CostResource (furyCost);
-		bladestormEffect.SetActive (true);
-	}
-
-	void BladestormAttackEnd()
-	{
-		bladestormEffect.SetActive (false);
-		anim.SetBool("Bladestorm", false);
-		abilityManager.abilityInProgress = false;
-		StartCoroutine (Cooldown ());
-	}
-
-	IEnumerator Cooldown()
-	{
-		yield return new WaitForSeconds (abilityCooldown);
-		onCooldown = false;
-	}
 	IEnumerator BladestormDamage()
-	{
-		bladestormDamage.SetActive (true);
+    {
+        resourceManager.CostResource(furyCost);
+        bladestormDamage.SetActive (true);
 		yield return new WaitForSeconds (.1f);
 		bladestormDamage.SetActive (false);
 	}
