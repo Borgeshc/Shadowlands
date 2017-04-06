@@ -25,7 +25,8 @@ public class SpawnNode : MonoBehaviour
     {
         if (!PlayerPrefsX.GetBool(transform.name))
         {
-            nodeManager.SpawnNodeUsed(transform.name);
+            // nodeManager.SpawnNodeUsed(transform.name);
+            PlayerPrefsX.SetBool(transform.name, true);
             PopulateActivatedEnemies();
             Spawn();
             Destroy(gameObject);
