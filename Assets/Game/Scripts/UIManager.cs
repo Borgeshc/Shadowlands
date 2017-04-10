@@ -12,8 +12,11 @@ public class UIManager : MonoBehaviour
 	[Space]
 	public KeyCode skillsKeyCode;
 	public GameObject skills;
-	//public AudioClip skillsSound;
-
+    //public AudioClip skillsSound;
+    [Space]
+    public KeyCode characterInfoKeyCode;
+    public GameObject characterPanel;
+    //public AudioClip characterInfoPanelSound;
 	AudioSource source;
 
 	void Start () 
@@ -40,6 +43,13 @@ public class UIManager : MonoBehaviour
 			//source.Play ();
 			skills.SetActive (!skills.activeSelf);
 		}
+
+        if(Input.GetKeyDown(characterInfoKeyCode))
+        {
+            //source.clip = characterInfoPanelSound;
+            //source.Play ();
+            characterPanel.SetActive(!characterPanel.activeSelf);
+        }
 
 
 		if (DevMode.devMove) 
