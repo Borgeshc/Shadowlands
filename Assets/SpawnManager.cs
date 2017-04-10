@@ -21,23 +21,37 @@ public class SpawnManager : MonoBehaviour
         freshGamePosition = GameObject.Find("FreshGamePosition").gameObject;
 
         classChosen = PlayerPrefs.GetInt("ClassChosen");
+        
         playerPrefab = Instantiate(classes[classChosen]) as GameObject;
+
         player = playerPrefab.transform.FindChild("Player").gameObject;
 
-        if (PlayerPrefs.GetString("GameStatus") == "NewGame" || PlayerPrefs.GetString("GameStatus") == "LevelJustLoaded")
+        if (PlayerPrefs.GetString("GameStatus") == "NewGame")
+        {
             player.transform.position = freshGamePosition.transform.position;
+        }
+        else if(PlayerPrefs.GetString("GameStatus") == "Entrance")
+        {
+            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Entrance"))
+            {
+                if(go.GetComponent<LoadLevel>().entranceNumber == PlayerPrefs.GetInt("EntranceNumber"))
+                {
+                    player.transform.position = go.GetComponent<LoadLevel>().entrancePosition.transform.position;
+                }
+            }
+        }
         else
         {
             player.transform.position = PlayerPrefsX.GetVector3("LastPosition");
             player.transform.rotation = PlayerPrefsX.GetQuaternion("LastRotation");
         }
-
-        print(player.name);
+        
     }
 
     void Update ()
     {
-		if((int)Time.time % 5 == 0)
+
+        if ((int)Time.time % 5 == 0)
         {
             PlayerPrefsX.SetVector3("LastPosition", player.transform.position);
             PlayerPrefsX.SetQuaternion("LastRotation", player.transform.rotation);
