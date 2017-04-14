@@ -28,7 +28,7 @@ public class Multishot : MonoBehaviour
 
 	void Update () 
 	{
-		if (Input.GetKey (keyCode) && !abilityManager.abilityInProgress && TargetObject.target != null &&  resourceManager.resource > resourceCost && !firing) 
+		if (Input.GetKey (keyCode) && !abilityManager.abilityInProgress &&  resourceManager.resource > resourceCost && !firing) 
 		{
 			firing = true;
 			StartCoroutine(Fire ());

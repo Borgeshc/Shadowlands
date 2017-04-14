@@ -16,7 +16,6 @@ public class SpawnManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        print("Called");
         PlayerPrefs.SetString("LastScene", Application.loadedLevelName);
         freshGamePosition = GameObject.Find("FreshGamePosition").gameObject;
 
