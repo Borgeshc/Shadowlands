@@ -29,7 +29,12 @@ public class Health : MonoBehaviour
 
 	void Start()
 	{
-		health = maxHealth;
+        maxHealth = PlayerPrefs.GetInt("Health");
+
+        if (transform.tag != "Player" && (PlayerPrefs.GetInt("CurrentLevel") * .5f) > 0)
+            maxHealth = maxHealth + (int)(PlayerPrefs.GetInt("CurrentLevel") * .5f);
+
+        health = maxHealth;
 		xpManager = GameObject.Find ("GameManager").GetComponent<ExperienceManager> ();
 		collision = GetComponent<Collider> ();
 	}
@@ -38,6 +43,9 @@ public class Health : MonoBehaviour
     {
         if(transform.tag != "Player")
         {
+            if ((PlayerPrefs.GetInt("CurrentLevel") * .5f) > 0)
+                maxHealth = maxHealth + (int)(PlayerPrefs.GetInt("CurrentLevel") * .5f);
+
             health = maxHealth;
             xpManager = GameObject.Find("GameManager").GetComponent<ExperienceManager>();
             collision = GetComponent<Collider>();
@@ -48,12 +56,15 @@ public class Health : MonoBehaviour
 
     public void TookDamage(int damage)
 	{
+        print("TookDamage");
 		if (Block.isBlocking || isImmune) {
 			return;
-		} 
+		}
+        print(PlayerPrefs.GetInt("Armor") + "Armor");
 
-		health -= damage;		
-
+        damage -= PlayerPrefs.GetInt("Armor");
+		health -= damage;
+        print(damage);
 		if (hasHealthBar)
 			healthBar.fillAmount = (health / maxHealth);
 
@@ -65,34 +76,35 @@ public class Health : MonoBehaviour
 	}
 
 	public void TookDamage( bool isCrit, int damage)
-		{
-
-		if (!isCrit) {
-			CombatText (damage.ToString ()).GetComponent<Animator> ().SetTrigger ("CBT");
-
-		} else {
+	{
+		if (!isCrit)
+        {
+	        CombatText (damage.ToString ()).GetComponent<Animator> ().SetTrigger ("CBT");
+		}
+        else
+        {
 			CombatText (damage.ToString ()).GetComponent<Animator> ().SetTrigger ("Crit");
 		}
-		
-			health -= damage;		
+        
+        health -= damage;		
 
-			if (hasHealthBar)
-				healthBar.fillAmount = (health / maxHealth);
+		if (hasHealthBar)
+			healthBar.fillAmount = (health / maxHealth);
 
 		if (health <= 0 && isDead == false) 
-			{
-				anim.SetBool ("Died", true);
-				StartCoroutine(Died ());
-			}
+		{
+			anim.SetBool ("Died", true);
+			StartCoroutine(Died ());
+		}
 
-			if (!hitEffect && health > 0) 
-			{
-				source.clip = hitEffectSounds [Random.Range (0, hitEffectSounds.Length)];
-				source.Play ();
-				hitEffect = true;
-				anim.SetBool ("Hit", true);
-				StartCoroutine (HitEffect ());
-			}
+		if (!hitEffect && health > 0) 
+		{
+			source.clip = hitEffectSounds [Random.Range (0, hitEffectSounds.Length)];
+			source.Play ();
+			hitEffect = true;
+			anim.SetBool ("Hit", true);
+			StartCoroutine (HitEffect ());
+		}
 	}
 
 	IEnumerator Died()
@@ -133,6 +145,7 @@ public class Health : MonoBehaviour
 
 	public void GainHealth(float healthGain)
 	{
+        print("GainHealth");
 		if (health + healthGain < maxHealth) 
 		{
 			health += healthGain;

@@ -119,13 +119,18 @@ public class SwingSword : MonoBehaviour
 		playingSound = false;
 	}
 
-	bool CritChance()
-	{
-		int damageAmount = Random.Range (minDamage, maxDamage);
-		damage = damageAmount; 
-		if (damageAmount < criticalNumber)
-			return false;
-		else
-			return true;
-	}
+    bool CritChance()
+    {
+        int damageAmount = Random.Range(minDamage, maxDamage);
+        damage = damageAmount + PlayerPrefs.GetInt("Damage");
+
+        int checkForCrit = Random.Range(0, 100);
+        if (checkForCrit <= PlayerPrefs.GetInt("CritChance"))
+        {
+            damage = damage * 2;
+            return true;
+        }
+        else
+            return false;
+    }
 }

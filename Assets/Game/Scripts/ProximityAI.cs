@@ -26,7 +26,7 @@ public class ProximityAI : MonoBehaviour
     bool slowed;
 
     bool inRange;
-
+    int actualDamage;
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
@@ -35,6 +35,10 @@ public class ProximityAI : MonoBehaviour
 		checkStatus = GetComponent<StatusEffect> ();
         currentSpeed = speed;
         nav.speed = currentSpeed;
+        if ((PlayerPrefs.GetInt("CurrentLevel") * .5f) > 0)
+            actualDamage = damage + (int)(PlayerPrefs.GetInt("CurrentLevel") * .5f);
+        else
+            actualDamage = damage;
     }
 
     private void OnEnable()
@@ -45,6 +49,10 @@ public class ProximityAI : MonoBehaviour
         checkStatus = GetComponent<StatusEffect>();
         currentSpeed = speed;
         nav.speed = currentSpeed;
+        if ((PlayerPrefs.GetInt("CurrentLevel") * .5f) > 0)
+            actualDamage = actualDamage + (int)(PlayerPrefs.GetInt("CurrentLevel") * .5f);
+        else
+            actualDamage = damage;
     }
 
     public bool IsSlowed()
@@ -117,7 +125,7 @@ public class ProximityAI : MonoBehaviour
 		}
 
 		if(player.GetComponent<Health>() != null)
-        player.GetComponent<Health>().TookDamage(damage);
+        player.GetComponent<Health>().TookDamage(actualDamage);
 		
         yield return new WaitForSeconds(attackFrequency);
         anim.SetBool("Attack", false);

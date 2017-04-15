@@ -35,10 +35,15 @@ public class DamageOnStay : MonoBehaviour
 	bool CritChance()
 	{
 		int damageAmount = Random.Range (minDamage, maxDamage);
-		damage = damageAmount; 
-		if (damageAmount < criticalNumber)
-			return false;
-		else
-			return true;
-	}
+		damage = damageAmount + PlayerPrefs.GetInt("Damage");
+
+        int checkForCrit = Random.Range(0, 100);
+        if (checkForCrit <= PlayerPrefs.GetInt("CritChance"))
+        {
+            damage = damage * 2;
+            return true;
+        }
+        else
+            return false;
+    }
 }

@@ -39,8 +39,8 @@ public class TargetObject : MonoBehaviour
 				if(hit.transform.GetComponent<SetTarget>() != null)
 				hit.transform.GetComponent<SetTarget> ().Targeted ();
 
-				if(!highlightedTargets.Contains(hit.transform.gameObject))
-				highlightedTargets.Add( hit.transform.gameObject);
+				//if(!highlightedTargets.Contains(hit.transform.gameObject))
+				//highlightedTargets.Add( hit.transform.gameObject);
 				target = hit.transform.gameObject;
 			}
 			if (hit.collider.tag == "Item") 
@@ -57,14 +57,14 @@ public class TargetObject : MonoBehaviour
 			Cursor.SetCursor (cursorMain, new Vector2 (cursorMain.width / 2, cursorMain.height / 2), CursorMode.Auto);
 			target = null;
 
-			if (highlightedTargets != null)
-				foreach (GameObject targets in highlightedTargets)
-                {
-					if(targets != null && targets.GetComponent<SetTarget>() != null)
-                    {
-                        targets.GetComponent<SetTarget>().NotTargeted();
-                    }
-				}
+			//if (highlightedTargets != null)
+			//	foreach (GameObject targets in highlightedTargets)
+   //             {
+			//		if(targets != null && targets.GetComponent<SetTarget>() != null)
+   //                 {
+   //                     targets.GetComponent<SetTarget>().NotTargeted();
+   //                 }
+			//	}
 		}
     }
 }

@@ -19,16 +19,30 @@ public class Stats : MonoBehaviour
     public static int armor;
     public static int critChance;
 
+    GameObject player;
     int skillPoints;
+    Health myHealth;
 
     private void Start()
     {
-        if(!PlayerPrefsX.GetBool("NewGameSetStats"))
+        if (!PlayerPrefsX.GetBool("NewGameSetStats") && PlayerPrefs.GetInt("ClassChosen") == 0) //Warrior
         {
             PlayerPrefsX.SetBool("NewGameSetStats", true);
-            damage = 0;
+            damage = 1;
+            health = 150;
+            armor = 3;
+            critChance = 5;
+            PlayerPrefs.SetInt("Damage", damage);
+            PlayerPrefs.SetInt("Health", health);
+            PlayerPrefs.SetInt("Armor", armor);
+            PlayerPrefs.SetInt("CritChance", critChance);
+        }
+        else if (!PlayerPrefsX.GetBool("NewGameSetStats") && PlayerPrefs.GetInt("ClassChosen") == 1) //Archer
+        {
+            PlayerPrefsX.SetBool("NewGameSetStats", true);
+            damage = 2;
             health = 100;
-            armor = 0;
+            armor = 1;
             critChance = 10;
             PlayerPrefs.SetInt("Damage", damage);
             PlayerPrefs.SetInt("Health", health);
@@ -50,6 +64,8 @@ public class Stats : MonoBehaviour
 
         skillPoints = PlayerPrefs.GetInt("SkillPoints");
         skillPointsText.text = skillPoints.ToString();
+        player = GameObject.FindGameObjectWithTag("Player");
+        myHealth = player.GetComponent<Health>();
     }
 
     private void Update()
@@ -84,6 +100,8 @@ public class Stats : MonoBehaviour
                 health += 10;
                 PlayerPrefs.SetInt("Health", health);
                 healthText.text = health.ToString();
+                myHealth.maxHealth = health;
+                myHealth.GainHealth(10);
                 break;
             case "Armor":
                 armor++;
