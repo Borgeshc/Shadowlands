@@ -12,7 +12,7 @@ public class ExperienceManager : MonoBehaviour
 	public GameObject levelUpEffect;
 	public AudioSource source;
 	Health health;
-	public SkillManager skillManager;
+	public Stats statistics;
 
 	void Start()
 	{
@@ -31,7 +31,6 @@ public class ExperienceManager : MonoBehaviour
 			currentLevel++;
 			UIlevel.text = "" + currentLevel;
 			PlayerPrefs.SetInt ("CurrentLevel", currentLevel);
-			skillManager.GainSkillPoint ();
 			xpRequiredPerLevel += xpRequiredPerLevel * 1.5f;
 			health.GainHealth (health.maxHealth);
 			float neededXP = xpRequiredPerLevel - experienceBar.fillAmount;
@@ -46,12 +45,13 @@ public class ExperienceManager : MonoBehaviour
 		{
 			experienceBar.fillAmount += experience / xpRequiredPerLevel;
 			PlayerPrefs.SetFloat ("CurrentExperience",experienceBar.fillAmount);
-		}
+        }
 	}
 
 	IEnumerator LeveledUp()
 	{
-		levelUpEffect.SetActive (true);
+        statistics.GainSkillPoint();
+        levelUpEffect.SetActive (true);
 		yield return new WaitForSeconds (3);
 		levelUpEffect.SetActive (false);
 	}
