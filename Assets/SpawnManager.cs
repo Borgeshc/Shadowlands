@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
         
         playerPrefab = Instantiate(classes[classChosen]) as GameObject;
 
-        player = playerPrefab.transform.FindChild("Player").gameObject;
+        player = playerPrefab.transform.Find("Player").gameObject;
 
         if (PlayerPrefs.GetString("GameStatus") == "NewGame")
         {

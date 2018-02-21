@@ -88,7 +88,7 @@ public class RainOfArrows : MonoBehaviour
 
 		spendingResource = false;
 		onCooldown = true;
-		StartCoroutine (RainOfArrowsDamage (obj.transform.FindChild("ArrowStormDamage").gameObject));
+		StartCoroutine (RainOfArrowsDamage (obj.transform.Find("ArrowStormDamage").gameObject));
 		StartCoroutine (Cooldown());
 	}
 

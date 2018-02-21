@@ -211,7 +211,7 @@ public class Health : MonoBehaviour
         {
             GameObject cbt = Instantiate(combatText) as GameObject;
             RectTransform cbtTransform = cbt.GetComponent<RectTransform>();
-            cbt.transform.SetParent(transform.FindChild("Canvas"));
+            cbt.transform.SetParent(transform.Find("Canvas"));
             cbtTransform.transform.localPosition = combatText.transform.localPosition;
             cbtTransform.transform.localScale = combatText.transform.localScale;
             cbtTransform.transform.localRotation = combatText.transform.localRotation;

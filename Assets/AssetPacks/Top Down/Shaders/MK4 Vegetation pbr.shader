@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 // Shader created with Shader Forge v1.17 
@@ -107,7 +109,7 @@ Shader "MK4/Vegetation pbr" {
             float4 _node_6062_copy = tex2Dlod(_Noise,float4(TRANSFORM_TEX(node_8254, _Noise),0.0,0));
             v.vertex.xyz += (_WindMaskA_var.a*lerp(float3(0,0,0),(_Direction.rgb*_node_6062_copy.rgb),_Distort));
             o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-            o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+            o.pos = UnityObjectToClipPos(v.vertex);
             return o;
         }
         void frag(
@@ -267,7 +269,7 @@ Shader "MK4/Vegetation pbr" {
         v.vertex.xyz += (_WindMaskA_var.a*lerp(float3(0,0,0),(_Direction.rgb*_node_6062_copy.rgb),_Distort));
         o.posWorld = mul(unity_ObjectToWorld, v.vertex);
         float3 lightColor = _LightColor0.rgb;
-        o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+        o.pos = UnityObjectToClipPos(v.vertex);
         UNITY_TRANSFER_FOG(o,o.pos);
         TRANSFER_VERTEX_TO_FRAGMENT(o)
         return o;
@@ -434,7 +436,7 @@ Pass {
         v.vertex.xyz += (_WindMaskA_var.a*lerp(float3(0,0,0),(_Direction.rgb*_node_6062_copy.rgb),_Distort));
         o.posWorld = mul(unity_ObjectToWorld, v.vertex);
         float3 lightColor = _LightColor0.rgb;
-        o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+        o.pos = UnityObjectToClipPos(v.vertex);
         TRANSFER_VERTEX_TO_FRAGMENT(o)
         return o;
     }
@@ -544,7 +546,7 @@ Pass {
         float4 _node_6062_copy = tex2Dlod(_Noise,float4(TRANSFORM_TEX(node_8254, _Noise),0.0,0));
         v.vertex.xyz += (_WindMaskA_var.a*lerp(float3(0,0,0),(_Direction.rgb*_node_6062_copy.rgb),_Distort));
         o.posWorld = mul(unity_ObjectToWorld, v.vertex);
-        o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+        o.pos = UnityObjectToClipPos(v.vertex);
         TRANSFER_SHADOW_CASTER(o)
         return o;
     }

@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 			{
 				if (items [i] == allPossibleItems [j].name) 
 				{
-					GameObject clone = Instantiate(allPossibleItems [j], slots[i].transform.position, slots[i].transform.rotation, slots[i].transform.FindChild("HoldItem").transform) as GameObject;
+					GameObject clone = Instantiate(allPossibleItems [j], slots[i].transform.position, slots[i].transform.rotation, slots[i].transform.Find("HoldItem").transform) as GameObject;
 					foreach (Transform child in clone.GetComponentInChildren<Transform>())
 					{
 						Destroy(child.gameObject);
@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
 					Destroy(clone.GetComponent<Button>());
 					inventoryItems.Add(allPossibleItems [j].name, clone);
 					itemStacking [i] = PlayerPrefsX.GetIntArray ("ItemStacking") [i];
-					slots[i].transform.FindChild("StackCount").GetComponent<Text>().text = itemStacking[i].ToString();
+					slots[i].transform.Find("StackCount").GetComponent<Text>().text = itemStacking[i].ToString();
 				}
 			}
 		}
@@ -69,11 +69,11 @@ public class Inventory : MonoBehaviour
         {
             if (!inventoryItems.ContainsKey(itemName))
             {
-                if (slots[i].transform.FindChild("HoldItem").transform.childCount > 0)
+                if (slots[i].transform.Find("HoldItem").transform.childCount > 0)
                     continue;
                 else
                 {
-                    GameObject clone = Instantiate(itemToAdd, slots[i].transform.position, slots[i].transform.rotation, slots[i].transform.FindChild("HoldItem").transform) as GameObject;
+                    GameObject clone = Instantiate(itemToAdd, slots[i].transform.position, slots[i].transform.rotation, slots[i].transform.Find("HoldItem").transform) as GameObject;
                     foreach (Transform child in clone.GetComponentInChildren<Transform>())
                     {
                         Destroy(child.gameObject);
@@ -90,7 +90,7 @@ public class Inventory : MonoBehaviour
 
 					PlayerPrefsX.SetStringArray ("InventoryItems", items.ToArray());
 					PlayerPrefsX.SetIntArray ("ItemStacking", itemStacking);
-                    slots[i].transform.FindChild("StackCount").GetComponent<Text>().text = itemStacking[i].ToString();
+                    slots[i].transform.Find("StackCount").GetComponent<Text>().text = itemStacking[i].ToString();
                     return;
                 }
             }
@@ -98,7 +98,7 @@ public class Inventory : MonoBehaviour
             {
                 int index = Convert.ToInt32(inventoryItems[itemName].transform.parent.transform.parent.name.Substring(13));
                 itemStacking[index - 1]++;
-                slots[index - 1].transform.FindChild("StackCount").GetComponent<Text>().text = itemStacking[index -1].ToString();
+                slots[index - 1].transform.Find("StackCount").GetComponent<Text>().text = itemStacking[index -1].ToString();
                 return;
             }
         }
@@ -116,13 +116,13 @@ public class Inventory : MonoBehaviour
 				if (itemStacking [index - 1] > 1) 
 				{
 					itemStacking [index - 1]--;
-					slots [index - 1].transform.FindChild ("StackCount").GetComponent<Text> ().text = itemStacking [index - 1].ToString ();
+					slots [index - 1].transform.Find ("StackCount").GetComponent<Text> ().text = itemStacking [index - 1].ToString ();
 					return;
 				} 
 				else 
 				{
 					itemStacking[index - 1]--;
-					slots[index - 1].transform.FindChild("StackCount").GetComponent<Text>().text = "";
+					slots[index - 1].transform.Find("StackCount").GetComponent<Text>().text = "";
 					inventoryItems.Remove (itemName);
 					items.Remove (itemName);
 

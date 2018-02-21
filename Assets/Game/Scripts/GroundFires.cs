@@ -10,7 +10,7 @@ public class GroundFires : MonoBehaviour
 
     void Start()
     {
-        groundFire = transform.FindChild("GroundFire").gameObject;
+        groundFire = transform.Find("GroundFire").gameObject;
     }
     void Update()
     {
